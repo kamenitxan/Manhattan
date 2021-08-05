@@ -1,15 +1,17 @@
+val scala3Version = "3.0.1"
+
 lazy val mygame =
 	(project in file("."))
 		.enablePlugins(ScalaJSPlugin, SbtIndigo) // Enable the Scala.js and Indigo plugins
 		.settings( // Standard SBT settings
-			name := "mygame",
+			name := "manhattan",
 			version := "0.0.1",
-			scalaVersion := "3.0.1",
-			organization := "org.mygame"
+			scalaVersion := scala3Version,
+			organization := "cz.kamenitxan.manhattan"
 		)
 		.settings( // Indigo specific settings
 			showCursor := true,
-			title := "My Game",
+			title := "Manhattan",
 			gameAssetsDirectory := "assets",
 			windowStartWidth := 720, // Width of Electron window, used with `indigoRun`.
 			windowStartHeight := 480, // Height of Electron window, used with `indigoRun`.
@@ -18,3 +20,8 @@ lazy val mygame =
 				"io.indigoengine" %%% "indigo-json-circe" % "0.9.0",
 			)
 		)
+
+addCommandAlias("buildGame", ";compile;fastOptJS;indigoBuild")
+addCommandAlias("runGame", ";compile;fastOptJS;indigoRun")
+addCommandAlias("buildGameFull", ";compile;fullOptJS;indigoBuildFull")
+addCommandAlias("runGameFull", ";compile;fullOptJS;indigoRunFull")
